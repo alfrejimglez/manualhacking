@@ -39,7 +39,48 @@
             "title": "Ver configuraciones de red",
             "command": "cat /etc/network/interfaces",
             "description": "Muestra las configuraciones de red en el sistema."
+        },
+        {
+            "title": "Buscar con `grep`",
+            "command": "grep <palabra> <archivo>",
+            "description": "Busca una palabra en un archivo. Sustituye `<palabra>` por lo que desees buscar y `<archivo>` por el archivo donde buscar."
+        },
+        {
+            "title": "Buscar una palabra ignorando comentarios con `grep`",
+            "command": "grep -E '^[^#]' /etc/squid/squid.conf > squid_limpio.conf",
+            "description": "Busca todas las líneas no comentadas en el archivo de configuración de Squid y las guarda en un nuevo archivo llamado `squid_limpio.conf`."
+        },
+        {
+            "title": "Buscar palabras completas con `grep`",
+            "command": "grep -w <palabra> <archivo>",
+            "description": "Busca la palabra exacta en el archivo, evitando que se encuentren coincidencias parciales."
+        },
+        {
+            "title": "Ver el contenido de un archivo con `tail`",
+            "command": "tail -f <archivo>",
+            "description": "Muestra las últimas líneas de un archivo y las actualiza en tiempo real a medida que el archivo se modifica."
+        },
+        {
+            "title": "Ver las últimas líneas de un archivo con `tail`",
+            "command": "tail -n 50 <archivo>",
+            "description": "Muestra las últimas 50 líneas de un archivo. Puedes cambiar `50` por el número de líneas que desees ver."
+        },
+        {
+            "title": "Usar `journalctl` para ver logs en tiempo real",
+            "command": "journalctl -f -u <servicio>",
+            "description": "Muestra en tiempo real los logs de un servicio en Linux. Sustituye `<servicio>` por el nombre del servicio que deseas monitorear."
+        },
+        {
+            "title": "Configuración estándar de red en `/etc/network/interfaces`",
+            "command": "iface eth0 inet static\naddress <IP>\nnetmask <máscara>\ngateway <puerta_de_enlace>",
+            "description": "Configura una interfaz de red estática, donde `<IP>` es la dirección IP, `<máscara>` es la máscara de red y `<puerta_de_enlace>` es la puerta de enlace predeterminada."
+        },
+        {
+            "title": "Configuración de red con `netplan`",
+            "command": "network:\n  version: 2\n  renderer: networkd\n  ethernets:\n    eth0:\n      dhcp4: no\n      addresses: [<IP>/24]\n      gateway4: <puerta_de_enlace>",
+            "description": "Configura una IP estática con `netplan`. Reemplaza `<IP>` con la dirección IP que desees y `<puerta_de_enlace>` con la puerta de enlace correspondiente."
         }
+        
     ],
     "Diccionarios": [
         {
