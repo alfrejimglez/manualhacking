@@ -46,9 +46,9 @@
             "description": "Busca una palabra en un archivo. Sustituye `<palabra>` por lo que desees buscar y `<archivo>` por el archivo donde buscar."
         },
         {
-            "title": "Buscar una palabra ignorando comentarios con `grep`",
+            "title": "Elimina las líneas comentadas con `grep`",
             "command": "grep -E '^[^#]' /etc/squid/squid.conf > squid_limpio.conf",
-            "description": "Busca todas las líneas no comentadas en el archivo de configuración de Squid y las guarda en un nuevo archivo llamado `squid_limpio.conf`."
+            "description": "Elimina las líneas comentadas (que comienzan con #) del archivo de configuración de Squid y guarda las líneas no comentadas en un nuevo archivo llamado squid_limpio.conf."
         },
         {
             "title": "Buscar palabras completas con `grep`",
@@ -79,6 +79,15 @@
             "title": "Configuración de red con `netplan`",
             "command": "network:\n  version: 2\n  renderer: networkd\n  ethernets:\n    eth0:\n      dhcp4: no\n      addresses: [<IP>/24]\n      gateway4: <puerta_de_enlace>",
             "description": "Configura una IP estática con `netplan`. Reemplaza `<IP>` con la dirección IP que desees y `<puerta_de_enlace>` con la puerta de enlace correspondiente."
+        },{
+            "title": "Configuración de red con DHCP en `/etc/network/interfaces`",
+            "command": "iface eth0 inet dhcp",
+            "description": "Configura la interfaz de red eth0 para obtener automáticamente una dirección IP mediante DHCP."
+        },
+        {
+            "title": "Configuración de red con DHCP en `netplan`",
+            "command": "network:\n  version: 2\n  renderer: networkd\n  ethernets:\n    eth0:\n      dhcp4: yes",
+            "description": "Configura netplan para que la interfaz eth0 obtenga una dirección IP automáticamente mediante DHCP (habilita dhcp4: yes para IPv4)."
         }
         
     ],
