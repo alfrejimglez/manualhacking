@@ -88,6 +88,16 @@
             "title": "Configuración de red con DHCP en `netplan`",
             "command": "network:\n  version: 2\n  renderer: networkd\n  ethernets:\n    eth0:\n      dhcp4: yes",
             "description": "Configura netplan para que la interfaz eth0 obtenga una dirección IP automáticamente mediante DHCP (habilita dhcp4: yes para IPv4)."
+        },
+        {
+            "title": "Ver todos los procesos en ejecución",
+            "command": "ps aux",
+            "description": "Muestra todos los procesos en ejecución en el sistema, incluyendo los de otros usuarios."
+        },
+        {
+            "title": "Buscar procesos específicos por nombre",
+            "command": "ps aux | grep <nombre_proceso> o/ puerto",
+            "description": "Filtra los procesos en ejecución buscando un proceso específico por su nombre."
         }
         
     ],
