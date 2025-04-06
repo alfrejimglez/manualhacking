@@ -98,7 +98,19 @@
             "title": "Buscar procesos específicos por nombre",
             "command": "ps aux | grep <nombre_proceso> o/ puerto",
             "description": "Filtra los procesos en ejecución buscando un proceso específico por su nombre."
+        },
+        {
+            "title": "Ver carpetas compartidas si una IP usa Samba (SMB)",
+            "command": "smbclient -L //<IP>",
+            "description": "Lista los recursos compartidos (carpetas e impresoras) disponibles en un servidor Samba especificado por IP."
+        },
+        {
+            "title": "Ver carpetas compartidas con usuario en Samba (SMB)",
+            "command": "smbclient -L //<IP> -U <usuario>",
+            "description": "Lista los recursos compartidos disponibles en un servidor Samba, autenticándose con un usuario específico."
         }
+        
+        
         
     ],
     "Diccionarios": [
