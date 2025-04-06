@@ -108,7 +108,13 @@
             "title": "Ver carpetas compartidas con usuario en Samba (SMB)",
             "command": "smbclient -L //<IP> -U <usuario>",
             "description": "Lista los recursos compartidos disponibles en un servidor Samba, autenticándose con un usuario específico."
+        },
+        {
+            "title": "Extraer datos ocultos con Steghide",
+            "command": "steghide extract -sf archivo.jpg",
+            "description": "Extrae información oculta de un archivo (como una imagen o audio) utilizando Steghide. Solicitará la contraseña si el contenido está protegido."
         }
+        
         
         
         
