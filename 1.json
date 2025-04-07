@@ -113,7 +113,7 @@
             "title": "Extraer datos ocultos con Steghide",
             "command": "steghide extract -sf archivo.jpg",
             "description": "Extrae información oculta de un archivo (como una imagen o audio) utilizando Steghide. Solicitará la contraseña si el contenido está protegido."
-        }
+        },
         {
             "title": "Ver proceso y PID en uso",
             "command": "lsof -i :PUERTO",
