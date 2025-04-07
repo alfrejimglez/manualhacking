@@ -123,8 +123,12 @@
             "title": "Matar proceso",
             "command": "kill -9 PID",
             "description": "Envía una señal SIGKILL al proceso con el PID especificado, terminando el proceso de forma inmediata. Sustituye 'PID' por el ID del proceso que deseas matar."
+        },
+        {
+            "title": "Matar fichero , script en proceso",
+            "command": "pkill -f main.py",
+            "description": "Envía una señal SIGKILL a un binario script o lo que sea para matarlo."
         }
-        
         
         
         
