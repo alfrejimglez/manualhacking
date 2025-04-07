@@ -114,6 +114,16 @@
             "command": "steghide extract -sf archivo.jpg",
             "description": "Extrae información oculta de un archivo (como una imagen o audio) utilizando Steghide. Solicitará la contraseña si el contenido está protegido."
         }
+        {
+            "title": "Ver proceso y PID en uso",
+            "command": "lsof -i :PUERTO",
+            "description": "Muestra los procesos que están usando un puerto específico en el sistema. Sustituye 'PUERTO' por el número de puerto que quieras verificar."
+        },
+        {
+            "title": "Matar proceso",
+            "command": "kill -9 PID",
+            "description": "Envía una señal SIGKILL al proceso con el PID especificado, terminando el proceso de forma inmediata. Sustituye 'PID' por el ID del proceso que deseas matar."
+        }
         
         
         
